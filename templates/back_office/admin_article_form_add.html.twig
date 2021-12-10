@@ -1,0 +1,35 @@
+{% extends "base_admin.html.twig" %}
+
+{% block title %}
+    BlogSymfony | Ajout d'un article
+{% endblock %}
+
+{% block body %}
+
+  <h1 class="text-center my-5">Ajouter un article</h1>
+
+    {{ form_start(formAdminArticle, {'attr': {'class': 'col-7 mx-auto'}}  ) }}
+
+        {{ form_row(formAdminArticle.titre) }}
+
+        {{ form_row(formAdminArticle.category) }}
+
+        {{ form_row(formAdminArticle.contenu) }}
+
+        {{ form_row(formAdminArticle.photo) }}
+
+    
+        {% if photoActuelle != null %}
+
+           <p>
+              <img src="{{ asset('uploads/photos/' ~ photoActuelle) }}" alt="" class="col-12 img-responsive">
+            </p>
+
+        {% endif %}
+
+        <button type="submit" class="btn btn-dark mb-5">Continuer</button>
+
+    {{ form_end(formAdminArticle) }}
+
+
+{% endblock %}
