@@ -2,11 +2,27 @@
 
 {% block title %}
     BlogSymfony | Ajout d'un article
+
+    {% if editMode %}
+      Modification article
+
+    {% else %}
+    Nouvel article
+    {% endif %}
+
+
 {% endblock %}
 
 {% block body %}
 
-  <h1 class="text-center my-5">Ajouter un article</h1>
+  <h1 class="text-center my-5">Ajouter un article
+    {% if editMode %}
+      Modification article
+
+    {% else %}
+    Création d'un nouvel article
+    {% endif %}
+   </h1>
 
     {{ form_start(formAdminArticle, {'attr': {'class': 'col-7 mx-auto'}}  ) }}
 
@@ -27,7 +43,14 @@
 
         {% endif %}
 
-        <button type="submit" class="btn btn-dark mb-5">Continuer</button>
+        <button type="submit" class="btn btn-dark mb-5">
+            {% if editMode %}
+              Modification article
+
+            {% else %}
+             Nouvel article
+            {% endif %}
+        </button>
 
     {{ form_end(formAdminArticle) }}
 

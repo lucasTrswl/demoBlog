@@ -14,6 +14,8 @@ class CommentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        if($options['commentFormBack'] == true)
+        {
         $builder
             ->add('auteur', TextType::class, [
                 'label' => "Nom",
@@ -35,14 +37,29 @@ class CommentType extends AbstractType
                         'message' => 'Merci de saisir votre commentaire.'
                     ])
                 ] 
-            ])
-        ;
+             ]);
+            }
+            elseif($options['commentFormFront'] == true)
+            {   
+                $builder
+                ->add('commentaire', TextareaType::class, [
+                    'label' => "Saisir votre commentaire",
+                    'required' => false,
+                    'attr' => [
+                        'rows' => 5
+                    ]
+                ]);
+            }
+        
+        
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Comment::class,
+            'commentFormFront' => false,
+            'commentFormBack' => false
         ]);
     }
 }

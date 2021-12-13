@@ -5,6 +5,17 @@
 {% endblock %}
 
 {% block body %}
+     {# affichage des message utilisateurs #}
+    {% for label, message in app.flashes(['success', 'danger']) %}
+
+        {% for message in message %}
+              {# on sert de l'identifiant du message (success, danger) pour les intégrer comme class Bootstrap #}
+              <div class="col-6 mx-auto text-center bg-{{ label }} p-3 text-white mb-3">
+
+              {{ message }}
+              </div>
+        {% endfor %}
+    {% endfor %}
 
 <table class="table table-striped" id="table-backoffice">
     <thead>
@@ -21,8 +32,7 @@
             {% endif %}
 
         {% endfor %}
-            <th>Cat.</th>
-            <th>Nb Comm.</th>
+            <th>Nb Art.</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -35,14 +45,15 @@
                 <td>{{ data.description }}</td>
                 <td class="text-center">{{ data.articles|length }}</td>
                     
-                <a href="" class="btn btn-primary mb-3"><i class="bi bi-plus-square"></i>
-                </a>
-                <br>
-                <a href="" class="btn btn-success mb-3"><i class="bi bi-pencil-square"></i>
-                </a>
-                <br>
+               
 
                 <td>
+                     <a href="{{ path('app_admin_categorie_add') }}" class="btn btn-primary mb-3"><i class="bi bi-plus-square"></i>
+                    </a>
+                    <br>
+                    <a href="{{ path('app_admin_categorie_update', {'id': data.id}) }}" class="btn btn-success mb-3"><i class="bi bi-pencil-square"></i>
+                    </a>
+                    <br>
                     {# <a href="{{ path('app_admin_articles_add') }}" class="btn btn-success mb-3"><i class="bi bi-pencil-square"></i></a> #}
                     <a href="{{ path('app_admin_articles_remove', {'id': data.id}) }}" class="btn btn-danger" onclick="return(confirm('Voulez-vous réellement supprimer la catégorie n° {{ data.id }}'));">
                         <i class="bi bi-trash-fill"></i>
@@ -53,5 +64,5 @@
         {% endfor %}
     </tbody>
     </table>
-    
+    {% endblock %}
 
